@@ -1,0 +1,7 @@
+{
+  "version": "zils-base-seed/v1",
+  "files": {
+    "cases.jsonl": "1b06853de3ba75c9bcbfc6dbc47dc79076b17d75877433f182d096b9438d7ea3",
+    "registry.json": "ec4e39ffba2ca4b45bb2c319fbc1d0ee908e4ae443f61d8496fcbfab33fc6909"
+  }
+}

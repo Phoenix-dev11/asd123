@@ -1,0 +1,11 @@
+{
+  "arts-known-noul-k5": {
+    "category": "arts",
+    "type": "noul"
+  },
+  "language-known-score-k5": {
+    "category": "language",
+    "ordered_equally_spaced": true,
+    "type": "score"
+  }
+}

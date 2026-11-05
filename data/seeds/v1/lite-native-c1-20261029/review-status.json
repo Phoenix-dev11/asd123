@@ -1,0 +1,87 @@
+{
+  "version": "zils-public-seed-distribution-review/v1",
+  "public_release_allowed": true,
+  "published": false,
+  "uploaded": false,
+  "qualification": false,
+  "owner_publication_decision_required": false,
+  "ready_for_owner_content_and_rights_review": true,
+  "preparation_checks_passed": true,
+  "rights_clearance_complete": false,
+  "public_url": null,
+  "publication_receipt": null,
+  "case_count": 30,
+  "family_count": 10,
+  "private_reservation_plan_included": false,
+  "file_sha256": {
+    "provenance.json": "c8c3cf65359dad7e5477586663fc1664f1eda0632c7004ac0ada2f868d0b3db1",
+    "NOTICE.md": "4bbff4d88b03276c2c917abcd37f504045a1767166792a614abd0385f100c3e8",
+    "seed/registry.json": "bbc8396f7cc9870c77da25741599542f82eff7b21953d71f9a7acb4978e2cd28",
+    "seed/cases.jsonl": "ba9a4052f595ef7feb9f5981a0b3288ea6119c17ff2aadb668f42255ae327d54",
+    "seed/manifest.json": "b7f240755281535125f0a232de0c754f229c7d872a3f4b163e550c6e05394f6d",
+    "licenses/20NEWSGROUPS-RIGHTS-STATUS.md": "5415cce13fea045efc4fa260e82790a45033d6a78d7b34dad9a0eec53f5a7469",
+    "licenses/PIQA-TERMS-STATUS.md": "fb5d46b62f49dc766c1f75a007a70007850bb39e1f2793eb72767ca78c5b9655",
+    "licenses/CMUDICT-LICENSE.txt": "bd4ce8e44170a5f9f481310ca85c51de3c4f851a65e679b40e603b143bd3542a",
+    "licenses/GENERATED-FIXTURES-STATUS.md": "1e27231bb6da1c61f35214984cd2f2f33725f8865cbf7658a1ff130971a6daf8",
+    "licenses/CXC-TERMS-STATUS.md": "ddd94de48b426ed77d7ee62bd0794346fb96cf04caf8f841f59d4933e5c29916",
+    "licenses/CONVOKIT-WIKIPEDIA-POLITENESS.md": "5db992f5e0d5da929cb70bbc48a9060251d729a2ab6faadcf0d6137697892d5e"
+  },
+  "hash_scope": "Every distribution file except this self-referential status file. Its raw-byte hash is reported in the assembly handoff.",
+  "input_hashes_stable_after_assembly": true,
+  "unresolved": [
+    {
+      "source": "20 Newsgroups",
+      "case_ids": [
+        "public-newsgroups-38-45114c8c64f4",
+        "public-newsgroups-136-e0ca5b266e08",
+        "public-newsgroups-564-af7b3263bd91"
+      ],
+      "issue": "No blanket publisher/contributor redistribution grant established; exact-post rights/publication basis requires owner disposition."
+    },
+    {
+      "source": "PIQA",
+      "case_ids": [
+        "review30-preference-0",
+        "review30-preference-1",
+        "review30-preference-2"
+      ],
+      "issue": "Primary terms and requested attribution absent from supplied local inputs; no license or public redistribution clearance inferred from mirror."
+    },
+    {
+      "source": "ConvoKit / Wikipedia Politeness",
+      "case_ids": [
+        "review27-9391239af346c131",
+        "review27-ac0ef5cdab416646",
+        "review27-025c548a48a14464"
+      ],
+      "issue": "Recorded corpus CC BY4.0 statement retained; complete requested corpus citation and underlying Wikipedia contributor/revision terms not resolved."
+    },
+    {
+      "source": "CxC / underlying captions",
+      "case_ids": [
+        "review27-a815c4c0136bc22b",
+        "review27-cb0dbc00c4ecde2b",
+        "review27-29f3692180b1e644"
+      ],
+      "issue": "Recorded any-purpose CxC grant lacks cached full text here; underlying caption/COCO attribution/terms remain unresolved."
+    },
+    {
+      "source": "Project-generated fixtures",
+      "issue": "Owner publication terms/disposition for original generated public material not selected by this wrapper."
+    }
+  ],
+  "not_performed": [
+    "publication/upload/send",
+    "network or legal research",
+    "model qualification",
+    "private exam reservation disclosure"
+  ],
+  "review_notes": "Assembly is complete and exact core hashes match. CMU full notice is preserved. Owner must resolve the listed source-specific rights/attribution issues and publication terms before any release; no license or legal clearance was invented. Private member/group reservations are excluded, with digest-only binding retained.",
+  "format_amendment": "Fresh arithmetic0/5/9;10exactcount levels0..9",
+  "prior_package_preserved": "public-seed-distribution-v1",
+  "owner_approval": {
+    "at": "2026-10-29T02:07:45.505668+00:00",
+    "scope": "Exact30-example seed and source notices; approved with documented source limitations",
+    "source": "explicit owner reply in current session"
+  }
+}

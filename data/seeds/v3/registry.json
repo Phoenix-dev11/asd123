@@ -1,0 +1,28 @@
+{
+  "arts-known-choice-k3": {
+    "category": "arts",
+    "type": "choice"
+  },
+  "arts-known-noul-k3": {
+    "category": "arts",
+    "type": "noul"
+  },
+  "arts-known-score-k3": {
+    "category": "arts",
+    "ordered_equally_spaced": true,
+    "type": "score"
+  },
+  "reasoning-known-choice-k3": {
+    "category": "reasoning",
+    "type": "choice"
+  },
+  "reasoning-known-noul-k3": {
+    "category": "reasoning",
+    "type": "noul"
+  },
+  "reasoning-known-score-k3": {
+    "category": "reasoning",
+    "ordered_equally_spaced": true,
+    "type": "score"
+  }
+}

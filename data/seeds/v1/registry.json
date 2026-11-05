@@ -1,0 +1,67 @@
+{
+  "arts-known-choice": {
+    "category": "arts",
+    "type": "choice"
+  },
+  "arts-known-noul": {
+    "category": "arts",
+    "type": "noul"
+  },
+  "arts-known-score": {
+    "category": "arts",
+    "ordered_equally_spaced": true,
+    "type": "score"
+  },
+  "language-known-choice": {
+    "category": "language",
+    "type": "choice"
+  },
+  "language-known-noul": {
+    "category": "language",
+    "type": "noul"
+  },
+  "language-known-score": {
+    "category": "language",
+    "ordered_equally_spaced": true,
+    "type": "score"
+  },
+  "reasoning-known-choice": {
+    "category": "reasoning",
+    "type": "choice"
+  },
+  "reasoning-known-noul": {
+    "category": "reasoning",
+    "type": "noul"
+  },
+  "reasoning-known-score": {
+    "category": "reasoning",
+    "ordered_equally_spaced": true,
+    "type": "score"
+  },
+  "retrieval-known-choice": {
+    "category": "retrieval",
+    "type": "choice"
+  },
+  "retrieval-known-noul": {
+    "category": "retrieval",
+    "type": "noul"
+  },
+  "retrieval-known-score": {
+    "category": "retrieval",
+    "ordered_equally_spaced": true,
+    "type": "score"
+  },
+  "tools-known-choice": {
+    "category": "tools",
+    "type": "choice"
+  },
+  "tools-known-noul": {
+    "category": "tools",
+    "type": "noul"
+  },
+  "tools-known-score": {
+    "category": "tools",
+    "ordered_equally_spaced": true,
+    "type": "score"
+  }
+}

@@ -1,0 +1,368 @@
+{
+  "version": "zils-public-seed-distribution-provenance/v1",
+  "prepared_date": "2026-10-28",
+  "public_release_allowed": true,
+  "published": false,
+  "seed_case_count": 30,
+  "core_seed_exact_byte_copy": true,
+  "core_manifest_verified": true,
+  "final_input_cases_equal_core_cases": true,
+  "public_source_records_only": true,
+  "source_metadata_contains_no_usernames_or_private_reservations": true,
+  "input_sha256": {
+    "review-final-seed/cases.jsonl": "508bccd778ed132bd9cc1ea81c2a590aa08dd6fe5ea29328337fd2d91be45901",
+    "review-final-seed/registry.json": "bbc8396f7cc9870c77da25741599542f82eff7b21953d71f9a7acb4978e2cd28",
+    "review-final-seed/manifest.json": "11a05c710844d1d3fb00b5b5195a77a50b781ffab5b37d87f5b81c4a3e9a3dcd",
+    "review-final-inputs/cases.jsonl": "508bccd778ed132bd9cc1ea81c2a590aa08dd6fe5ea29328337fd2d91be45901",
+    "review-final-inputs/registry.json": "4b72c05696d4b7580a11ea74e2c2a0cdce45d3d30c297e11b3140eff043af111",
+    "review-final-inputs/CMUDICT-LICENSE.txt": "bd4ce8e44170a5f9f481310ca85c51de3c4f851a65e679b40e603b143bd3542a",
+    "review-final-inputs/repair-provenance.json": "ef323347fbd727229a8f7bf0eaac420ac5a8fc53f1996600edb3f2a37f437fed",
+    "review-final-inputs/review-status.json": "4997039b866bd365e715acaccaa96b1cb751a840c4af13ccc52f7e42179420e2",
+    "politeness-source-receipt.json": "5a262da2bcef9da23dd014f86f4e8c9dc093ffbf7caab81d70324593ba143c87",
+    "recipe-decisions.md": "fdca810719eb01cf7f0f62fdd741bd0f69e5d9a8873aee5857036d287436e462",
+    "private-recipe.md": "d144fb8f0ad51c810003f8970b7eb43d5a4f2bd1a8236b7294a7f919eadfdf1d",
+    "private_gold.py": "da2526a6a4aefde526cc381f3c392be9d5f99c769611be5cd62d4259a870829c",
+    "review-final-seed-v2/registry.json": "bbc8396f7cc9870c77da25741599542f82eff7b21953d71f9a7acb4978e2cd28",
+    "review-final-seed-v2/cases.jsonl": "ba9a4052f595ef7feb9f5981a0b3288ea6119c17ff2aadb668f42255ae327d54",
+    "review-final-seed-v2/manifest.json": "b7f240755281535125f0a232de0c754f229c7d872a3f4b163e550c6e05394f6d",
+    "review-final-inputs-v2/registry.json": "4b72c05696d4b7580a11ea74e2c2a0cdce45d3d30c297e11b3140eff043af111",
+    "review-final-inputs-v2/format-amendment.json": "5d4a32766648497d428c69a39275182685644281d3cea470fe1359255d838652",
+    "review-final-inputs-v2/cases.jsonl": "ba9a4052f595ef7feb9f5981a0b3288ea6119c17ff2aadb668f42255ae327d54"
+  },
+  "source_inventory_receipt_sha256": "69ea95ec5f98fff83c007d41045fe6f373ee270feb9834001bb4968f16bb0997",
+  "private_lineage_binding": {
+    "included": false,
+    "sha256": "7b11829db743f4bad7200c066efbcedc8f279f2100c65c3b1c733f8fbe81a24f",
+    "scope": "Digest only; no primitive member, parent group or reservation-plan content is distributed."
+  },
+  "source_pins": {
+    "cxc": {
+      "repo": "DolphyWind/cxc-sts-sentences",
+      "path": "aggregated/test/0000.parquet",
+      "cached_revision": "28ee4b6425878563770ba2421a33c0bc0925565a",
+      "file_sha256": "37768e4b9cc6db2d8df8a079a06c7438097b6e556470b09bff57f92e022cc62e",
+      "source_id_prefix": "DolphyWind/cxc-sts-sentences:aggregated/test/0000.parquet:"
+    },
+    "piqa": {
+      "repo": "baber/piqa",
+      "path": "piqa_validation.parquet",
+      "cached_revision": "142f6d7367fd9877f0fb3b5734ea6a545f54cdd1",
+      "file_sha256": "2b17ee1215b1ceb2ddabf4c90a05c5a8b833bef9d207960f57d111c43a2080f3",
+      "source_id_prefix": "baber/piqa:piqa_validation.parquet:"
+    },
+    "newsgroups": {
+      "repo": "SetFit/20_newsgroups",
+      "path": "test.jsonl",
+      "cached_revision": "f1b91292074e7cfb69be58b642d583ec262f30ed",
+      "file_sha256": "a0c1f20c01fa77f6b832fdb5e6218018660781e762f3e68ee3e6f279e7839bcc",
+      "source_id_prefix": "SetFit/20_newsgroups:test.jsonl:"
+    },
+    "cmudict": {
+      "repo": "jc4p/CMUdict",
+      "path": "data/test-00000-of-00001.parquet",
+      "cached_revision": "f6a19659665acd56aa161c97198185e469ffbec5",
+      "file_sha256": "4917fb3272f31c4a0567397806bb003ae4869ff9def1f3fb3e984cebcf24b03b",
+      "source_id_prefix": "jc4p/CMUdict:data/test-00000-of-00001.parquet:"
+    },
+    "politeness": {
+      "url": "https://zissou.infosci.cornell.edu/convokit/datasets/wikipedia-politeness-corpus/wikipedia-politeness-corpus.zip",
+      "sha256": "90ec6c2c6e05d064a805d2e4be4a8d442f370b31f0025798e8eaf62d0014ba48",
+      "license_source": "https://convokit.cornell.edu/documentation/wiki_politeness.html",
+      "license": "CC-BY-4.0 perprimarydocumentation; include provenance/underlying Wikipedia notices",
+      "normalized_sha256": "6f09254bcccda99fe16e44383dc6d3b651b963b739f228ea541d6fbb000e1514",
+      "archive_hash_verified_locally": true
+    }
+  },
+  "cases": [
+    {
+      "case_id": "public-count-v2-397200e2e0771850805c",
+      "family": "reasoning-known-score-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:public-exact-count-v2:397200e2e0771850805c55339905e76968c8b3bb1107de56e8ed29e9f20b690a",
+      "seed_case_sha256": "02c1ecffbc59bc80d9c34fc14a903991e3ccf451c29edbe65bf410b496670a49",
+      "transformation": "Fresh code-generated exact count0..9; pre-seal deployed-format correction; no original answer relabeled."
+    },
+    {
+      "case_id": "public-count-v2-b45faeb9e1251f82aab2",
+      "family": "reasoning-known-score-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:public-exact-count-v2:b45faeb9e1251f82aab2ca7f859dbf49c9edd958ac12a51b92f4f4994e3d34c7",
+      "seed_case_sha256": "c39e513471be0e7f16ed8ab6fadc985b0a437ec31b4f3f820cf8d2d407ec6502",
+      "transformation": "Fresh code-generated exact count0..9; pre-seal deployed-format correction; no original answer relabeled."
+    },
+    {
+      "case_id": "public-count-v2-cfbb3e71ccc8e90543ab",
+      "family": "reasoning-known-score-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:public-exact-count-v2:cfbb3e71ccc8e90543abf457a91972a852c35cee47561b899b80c48a9d734d89",
+      "seed_case_sha256": "88e6f1a315354dac6fbb2a80b135128cb628641bcafbef8fb333296cf2a67022",
+      "transformation": "Fresh code-generated exact count0..9; pre-seal deployed-format correction; no original answer relabeled."
+    },
+    {
+      "case_id": "review27-a815c4c0136bc22b",
+      "family": "language-known-score-k6",
+      "source_group": "cxc",
+      "source_id": "DolphyWind/cxc-sts-sentences:aggregated/test/0000.parquet:15",
+      "seed_case_sha256": "fbb46643da08182b46bbfbe55c651beea558990cd331e534ad1bd24b05059bfe",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-cb0dbc00c4ecde2b",
+      "family": "language-known-score-k6",
+      "source_group": "cxc",
+      "source_id": "DolphyWind/cxc-sts-sentences:aggregated/test/0000.parquet:1",
+      "seed_case_sha256": "ed161aade831ffcac0746dc5736270b224e2dee2c385ab93f0c8dae6dfda9a60",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-29f3692180b1e644",
+      "family": "language-known-score-k6",
+      "source_group": "cxc",
+      "source_id": "DolphyWind/cxc-sts-sentences:aggregated/test/0000.parquet:840",
+      "seed_case_sha256": "c82630e831263ead8c78f82a875ea5400509023bcc446e5b5e1ebc8079e19c67",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "public-newsgroups-38-45114c8c64f4",
+      "family": "retrieval-known-choice-k6",
+      "source_group": "newsgroups",
+      "source_id": "SetFit/20_newsgroups:test.jsonl:38",
+      "seed_case_sha256": "8f7310f80be7687948545bfdd6d4c8ea6726127e5a10863e89ff89ea32fcf506",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package.",
+      "recorded_public_fixture_provenance": {
+        "source_id": "SetFit/20_newsgroups:test.jsonl:38",
+        "native_label": 6,
+        "native_label_text": "misc.forsale",
+        "word_count": 20,
+        "publisher_wide_permission_not_established": true
+      }
+    },
+    {
+      "case_id": "public-newsgroups-136-e0ca5b266e08",
+      "family": "retrieval-known-choice-k6",
+      "source_group": "newsgroups",
+      "source_id": "SetFit/20_newsgroups:test.jsonl:136",
+      "seed_case_sha256": "8fb93402691e84c0cdcb17cc100bd0db39be1a817fd1f3d42cb0e866eb0baa0b",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package.",
+      "recorded_public_fixture_provenance": {
+        "source_id": "SetFit/20_newsgroups:test.jsonl:136",
+        "native_label": 5,
+        "native_label_text": "comp.windows.x",
+        "word_count": 21,
+        "publisher_wide_permission_not_established": true
+      }
+    },
+    {
+      "case_id": "public-newsgroups-564-af7b3263bd91",
+      "family": "retrieval-known-choice-k6",
+      "source_group": "newsgroups",
+      "source_id": "SetFit/20_newsgroups:test.jsonl:564",
+      "seed_case_sha256": "0528fbe755e332e04a8647b4a07e75a4d0e62226e55677ec71fe1356fbbdae79",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package.",
+      "recorded_public_fixture_provenance": {
+        "source_id": "SetFit/20_newsgroups:test.jsonl:564",
+        "native_label": 9,
+        "native_label_text": "rec.sport.baseball",
+        "word_count": 18,
+        "publisher_wide_permission_not_established": true
+      }
+    },
+    {
+      "case_id": "public-coverage-0-ea22517cdf9b",
+      "family": "retrieval-known-score-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:scenario:a90d2e6999bda8469d9a6f5e8c572abe1ad1adb41f401ddc85d7ad26454fd1e4",
+      "seed_case_sha256": "45f146e5cff1ead6db2cb18cf21291a23f11fd976702c09804df21820fb272b2",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package.",
+      "recorded_public_fixture_provenance": {
+        "generator": "private_gold.coverage",
+        "seed": "public-coverage-c1-20261028-0",
+        "target": 0,
+        "generator_sha256": "da2526a6a4aefde526cc381f3c392be9d5f99c769611be5cd62d4259a870829c"
+      }
+    },
+    {
+      "case_id": "public-coverage-1-3394080a862a",
+      "family": "retrieval-known-score-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:scenario:3c0886bb79aa3197bd8676049c07b48cf0cb4dbfe0f0798a7b929f6b2d09b30f",
+      "seed_case_sha256": "7fe0b3264b1f9624b3f6d65bcf69c573ca4c982e717026668d1d6c7918be402b",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package.",
+      "recorded_public_fixture_provenance": {
+        "generator": "private_gold.coverage",
+        "seed": "public-coverage-c1-20261028-1",
+        "target": 1,
+        "generator_sha256": "da2526a6a4aefde526cc381f3c392be9d5f99c769611be5cd62d4259a870829c"
+      }
+    },
+    {
+      "case_id": "public-coverage-2-44280ae27ac8",
+      "family": "retrieval-known-score-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:scenario:dc1919454cc13aea58e468839c16b714b2984bd6e47e2f0dd6a2441015a260f8",
+      "seed_case_sha256": "be68de0df64605d6c8e3dc58a80cbb20b1685afffce15dc20294615d3d118baa",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package.",
+      "recorded_public_fixture_provenance": {
+        "generator": "private_gold.coverage",
+        "seed": "public-coverage-c1-20261028-2",
+        "target": 2,
+        "generator_sha256": "da2526a6a4aefde526cc381f3c392be9d5f99c769611be5cd62d4259a870829c"
+      }
+    },
+    {
+      "case_id": "review27-e2005112cb862100",
+      "family": "tools-known-choice-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:review27:tools:choice:0",
+      "seed_case_sha256": "313f3bfc5cff9d0c99ebb52c371c1718e87f0218e07d9eff6bbe37faf602264d",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-086f5044276e3d95",
+      "family": "tools-known-choice-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:review27:tools:choice:1",
+      "seed_case_sha256": "e2e802087d41baaf6774df7a8846850f6222e78eacd2154a8a6e9dc872860104",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-673308cae54227c3",
+      "family": "tools-known-choice-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:review27:tools:choice:2",
+      "seed_case_sha256": "591bebe2185d982c95fa3fa2bbed7b8d7ffb89c70289554cf9c1c1a5d8ce8327",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-d9dc3318f4f919c3",
+      "family": "tools-known-noul-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:review27:tools:noul:0",
+      "seed_case_sha256": "d8a9f55d552658f926600d484a0b0e34604a875f795ca2b83f158cc8a9c2bec8",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-691d9ac8ec4ee9ac",
+      "family": "tools-known-noul-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:review27:tools:noul:1",
+      "seed_case_sha256": "7e635538d43366da6f1c09dcd454ca5b5c9212eeb52160f117258e9daf3c238c",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-979889944edf6fa7",
+      "family": "tools-known-noul-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:review27:tools:noul:2",
+      "seed_case_sha256": "cefe49d2d5eb2946b166e81a1eac6014f32ded26be2749824c0f61a102036b5e",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-13aa88034d7d74e6",
+      "family": "tools-known-score-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:review27:tools:score:0",
+      "seed_case_sha256": "04f2c1879ec2a4e03d73090d59b9f46f99226481ad0138bdcbd0190a10b07c6c",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-37e894153ff8fab3",
+      "family": "tools-known-score-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:review27:tools:score:1",
+      "seed_case_sha256": "58550e6b1aa352c6ca01af3374a47bfe807bd9fd875c0c0b775fd830434999a8",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-63d3a35e352eb942",
+      "family": "tools-known-score-k6",
+      "source_group": "project-generated",
+      "source_id": "computed:review27:tools:score:2",
+      "seed_case_sha256": "b439925ca596480f62daa55944696a0ff2da4d3accd5ef78a1ab94a954b453e9",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-9391239af346c131",
+      "family": "arts-known-choice-k6",
+      "source_group": "politeness",
+      "source_id": "convokit:wikipedia-politeness-corpus:629705",
+      "seed_case_sha256": "99168ffcc5238cf68b75c7007a64268e324ff9ad4872fbf983b101834bf0a284",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-ac0ef5cdab416646",
+      "family": "arts-known-choice-k6",
+      "source_group": "politeness",
+      "source_id": "convokit:wikipedia-politeness-corpus:627353",
+      "seed_case_sha256": "fc98ddfd9f85f08d5df84cb117c4e048db59a8a956b9b351e963d61511780c7f",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-025c548a48a14464",
+      "family": "arts-known-choice-k6",
+      "source_group": "politeness",
+      "source_id": "convokit:wikipedia-politeness-corpus:244336",
+      "seed_case_sha256": "6324e81fe0e53100a037a57836a954922cb3d5d2ea98efda20477336215e71a7",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-82b22e99a89380cf",
+      "family": "arts-known-score-k6",
+      "source_group": "cmudict",
+      "source_id": "jc4p/CMUdict:data/test-00000-of-00001.parquet:2186",
+      "seed_case_sha256": "5eda7c5e712d4383aeff1e4f99e8e17fdceaeda63b9cd41ca75571e486b38518",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-b3ca0cf0262a56bb",
+      "family": "arts-known-score-k6",
+      "source_group": "cmudict",
+      "source_id": "jc4p/CMUdict:data/test-00000-of-00001.parquet:273",
+      "seed_case_sha256": "bdb4244199e1d716669f342ff1641e090d1c8b948a118c04863749607621b48b",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review27-c89d749c38e82e21",
+      "family": "arts-known-score-k6",
+      "source_group": "cmudict",
+      "source_id": "jc4p/CMUdict:data/test-00000-of-00001.parquet:12525",
+      "seed_case_sha256": "ea8bc0378b8fe5390a43cc9ef21c4502dfed8e1dd576802916314c9313b94411",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review30-preference-0",
+      "family": "reasoning-known-noul-k6",
+      "source_group": "piqa",
+      "source_id": "baber/piqa:piqa_validation.parquet:52",
+      "seed_case_sha256": "7d7e98bb3cb8618162c91f0d64654b3b79bb8853a18da6d692f21a77f8f40fa0",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review30-preference-1",
+      "family": "reasoning-known-noul-k6",
+      "source_group": "piqa",
+      "source_id": "baber/piqa:piqa_validation.parquet:140",
+      "seed_case_sha256": "521758530df8d73ee7a6fe67e71e1333130e22449fe8cae76b825daa8d1a8e7f",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    },
+    {
+      "case_id": "review30-preference-2",
+      "family": "reasoning-known-noul-k6",
+      "source_group": "piqa",
+      "source_id": "baber/piqa:piqa_validation.parquet:144",
+      "seed_case_sha256": "f5a35380f3497235bafaf76a86676c81edab7f4d2fcc19bc47051025af0dba04",
+      "transformation": "Exact final reviewed inline-text case; no changes made for this distribution package."
+    }
+  ],
+  "rights_basis": "Existing local receipts and planning records only; no new network research or legal clearance. See licenses/ notices.",
+  "source_license_notice_sha256": {
+    "CMUDICT-LICENSE.txt": "bd4ce8e44170a5f9f481310ca85c51de3c4f851a65e679b40e603b143bd3542a"
+  },
+  "hash_convention": "Input/file hashes are raw-byte SHA256; seed_case_sha256 uses UTF-8 json.dumps(case,sort_keys=True,ensure_ascii=False) with default separators.",
+  "format_amendment": "Arithmetic examples now exact0/5/9 under ten-level deployed Score format; previous distribution retained.",
+  "owner_approval": {
+    "at": "2026-10-29T02:07:45.505668+00:00",
+    "scope": "Exact30-example seed and source notices; approved with documented source limitations",
+    "source": "explicit owner reply in current session"
+  }
+}

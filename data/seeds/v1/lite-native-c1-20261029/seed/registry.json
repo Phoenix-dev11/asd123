@@ -1,0 +1,47 @@
+{
+  "reasoning-known-score-k6": {
+    "category": "reasoning",
+    "type": "score",
+    "ordered_equally_spaced": true
+  },
+  "language-known-score-k6": {
+    "category": "language",
+    "type": "score",
+    "ordered_equally_spaced": true
+  },
+  "retrieval-known-choice-k6": {
+    "category": "retrieval",
+    "type": "choice"
+  },
+  "retrieval-known-score-k6": {
+    "category": "retrieval",
+    "type": "score",
+    "ordered_equally_spaced": true
+  },
+  "tools-known-choice-k6": {
+    "category": "tools",
+    "type": "choice"
+  },
+  "tools-known-noul-k6": {
+    "category": "tools",
+    "type": "noul"
+  },
+  "tools-known-score-k6": {
+    "category": "tools",
+    "type": "score",
+    "ordered_equally_spaced": true
+  },
+  "arts-known-choice-k6": {
+    "category": "arts",
+    "type": "choice"
+  },
+  "arts-known-score-k6": {
+    "category": "arts",
+    "type": "score",
+    "ordered_equally_spaced": true
+  },
+  "reasoning-known-noul-k6": {
+    "category": "reasoning",
+    "type": "noul"
+  }
+}
