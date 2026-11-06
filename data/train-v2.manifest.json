@@ -1,0 +1,23 @@
+{
+ "rows": 86526,
+ "parts": {
+  "generated and datasets": 33816,
+  "generated and datasets: dropped (duplicate or in dev)": 2,
+  "generated and datasets: dropped (too long)": 1,
+  "pin": 12710,
+  "pin: dropped (duplicate or in dev)": 2038,
+  "pin: dropped (too long)": 252,
+  "relay": 40000
+ },
+ "types": {
+  "choice": 50822,
+  "noul": 20134,
+  "score": 15570
+ },
+ "relay_dropped": {
+  "non-train split": 2102,
+  "over the length limit": 4643,
+  "held out by the exam": 3274
+ },
+ "sha256": "cdd146ea11b5bfcc877f60be660c5f8cb9132e83e8d8b47fe2388c759c58f22f"
+}

@@ -1,0 +1,21 @@
+model            score  temperature
+house            42.10        1.711
+T                55.98        1.525
+D                60.07        1.359
+S2               59.13        1.359
+
+By category:
+                reasoning   language  retrieval      tools       arts
+house                0.36       0.60       0.42       0.35       0.25
+T                    0.37       0.65       0.55       0.84       0.34
+D                    0.59       0.66       0.63       0.57       0.46
+S2                   0.43       0.67       0.63       0.77       0.42
+
+Does the dev set reproduce the known order? If not, fix it before trusting it.
+  [PASS] S2 above T: +3.09 [+1.78, +4.52]
+  [PASS] T above house: +13.89 [+12.45, +15.31]
+  [FAIL] S2 above D: -0.85 [-1.84, +0.15]
+  [PASS] D above house: +17.84 [+15.83, +19.80]
+
+3 of 4 checks passed. Only 'known' and stand-in 'new' dev families are covered, so a pass is necessary, not sufficient.
+done

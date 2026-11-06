@@ -1,0 +1,5 @@
+.gitattributes 1519 
+README.md 1361 
+model-00001-of-00001.safetensors 1706027688 51be67c25f8e7363c4411a397b07d739db3dd2972d4a4af8ec71edf64b61a9ec
+model.safetensors.index.json 41066 
+zils-owner.json 63 

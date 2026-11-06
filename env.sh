@@ -5,6 +5,14 @@ export ZILS_REPO="${ZILS_REPO:-$HOME/.zils/zils}"
 export ZILS_D3_RUNTIME_PYTHON="${ZILS_D3_RUNTIME_PYTHON:-$ZILS_REPO/.venv-d3/bin/python}"
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 PY="$ZILS_D3_RUNTIME_PYTHON"
+# A checkpoint's own runtime is imported from its folder, and a __pycache__ there makes validation refuse it.
+export PYTHONDONTWRITEBYTECODE=1
+# .venv-d3 does not install zils itself, so `"$PY" -m zils.teacher` needs the checkout on the path.
+export PYTHONPATH="$ZILS_REPO${PYTHONPATH:+:$PYTHONPATH}"
+# The miner runtime has the hf CLI and pyarrow (rebuild.py needs it); .venv-d3 does not pin pyarrow.
+RELAY_PY="$ZILS_REPO/.venv-kev/bin/python"
+hf() { "$ZILS_REPO/.venv-kev/bin/hf" "$@"; }
+export PATH="$HOME/.local/bin:$PATH"
 
 # The current lite soup, 5 Nov 2026.
 T_REF=thermopylae-777/zils-lite-body-2@618946d00aeafc81f701c3789f91c83d9fcb6fe0

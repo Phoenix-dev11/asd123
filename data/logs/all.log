@@ -1,0 +1,352 @@
+== install: starting 17:00:56
+
+  ┌─────────────────────────────────────────────────────┐
+  │  ◆ Zils Miner Installer                             │
+  ├─────────────────────────────────────────────────────┤
+  │  Decision models, trained by Bittensor miners.      │
+  └─────────────────────────────────────────────────────┘
+
+✓ uv 0.12.21
+→ cloning zils
+✓ zils cloned into ~/.zils/zils
+→ checking out 17551565cc6a7636b452765d205526a5f479aa7d
+✓ zils at 17551565cc6a7636b452765d205526a5f479aa7d
+→ building the miner runtime (Python 3.13)
+✓ miner runtime ready
+→ building the d3 training runtime (Python 3.12, CUDA 13.0)
+✓ d3 training runtime ready
+✓ zils-miner and btcli commands ready in ~/.local/bin
+✓ added ~/.local/bin to PATH in ~/.bashrc
+
+Zils miner installed. Next: zils-miner doctor
+Reload your shell first: source ~/.bashrc
+== install: finished 17:03:32
+== gpu-check: starting 17:03:32
+torch 2.10.0+cu130 cuda True NVIDIA GeForce RTX 4090
+zils from /root/.zils/zils/zils/__init__.py
+== gpu-check: finished 17:03:36
+== reference: starting 17:03:36
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 24 files:   4%|▍         | 1/24 [00:00<00:04,  4.65it/s]Fetching 24 files:  38%|███▊      | 9/24 [00:00<00:00, 24.92it/s]Fetching 24 files:  62%|██████▎   | 15/24 [00:00<00:00, 26.91it/s]Fetching 24 files:  83%|████████▎ | 20/24 [00:00<00:00, 26.50it/s]Fetching 24 files:  96%|█████████▌| 23/24 [00:01<00:00,  8.74it/s]Fetching 24 files: 100%|██████████| 24/24 [00:04<00:00,  5.64it/s]
+== reference: finished 17:03:43
+== qwen: starting 17:03:43
+[90mHint: A new version of huggingface_hub (2.4.0) is available! You are using version 1.33.0.[0m
+[90mHint: The `hf-cli` skill is not installed. Run `hf skills add -g` to teach your AI agents how to use the `hf` CLI.[0m
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:  50%|█████     | 1/2 [00:00<00:00,  5.21it/s]Fetching 2 files: 100%|██████████| 2/2 [00:04<00:00,  2.36s/it]Fetching 2 files: 100%|██████████| 2/2 [00:04<00:00,  2.03s/it]
+[32m✓ Downloaded[0m
+  path: /root/work/asd123/data/qwen
+== qwen: finished 17:03:48
+== relay: starting 17:03:48
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:  50%|█████     | 1/2 [00:00<00:00,  2.73it/s]Fetching 2 files: 100%|██████████| 2/2 [00:02<00:00,  1.27s/it]Fetching 2 files: 100%|██████████| 2/2 [00:02<00:00,  1.14s/it]
+[32m✓ Downloaded[0m
+  path: /root/work/asd123/data/relay
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+data/train-00000-of-00006.parquet: 29548 rows
+data/train-00001-of-00006.parquet: 29846 rows
+data/train-00002-of-00006.parquet: 29522 rows
+data/train-00003-of-00006.parquet: 29394 rows
+data/train-00004-of-00006.parquet: 29309 rows
+data/train-00005-of-00006.parquet: 29716 rows
+ARC-Challenge: done
+ARC-Easy: done
+BANKING77: done
+BFCL-tool-selection: done
+CLINC150+OOS: done
+HellaSwag: done
+MMLU: done
+WinoGrande: done
+iSarcasmEval-A-En: done
+iSarcasmEval-C-En: done
+{
+ "records": 204582,
+ "rebuilt": 204582,
+ "missing": {}
+}
+relay rows rebuilt: 204582 of 204582
+== relay: finished 17:04:34
+== big-dev: starting 17:04:34
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+{
+ "seed": 20261105,
+ "train_by_family": {
+  "arts-known-choice-k3": 1370,
+  "arts-known-noul-k5": 1387,
+  "arts-known-score-k6": 1387,
+  "language-known-choice-s1": 3110,
+  "language-known-noul-k2": 1375,
+  "language-known-score-k6": 1366,
+  "reasoning-known-choice-k3": 2751,
+  "reasoning-known-noul-k6": 1379,
+  "reasoning-known-score-k6": 3140,
+  "retrieval-known-choice-k6": 1390,
+  "retrieval-known-noul-k2": 1392,
+  "retrieval-known-score-k6": 3134,
+  "tools-known-choice-k6": 3123,
+  "tools-known-noul-k6": 3065,
+  "tools-known-score-k6": 3079
+ },
+ "dev_by_family": {
+  "arts-known-choice-k3": 129,
+  "arts-known-choice-k6": 3,
+  "arts-known-noul-k5": 133,
+  "arts-known-score-k6": 112,
+  "devnew-arts-known-choice": 20,
+  "devnew-arts-known-choice-k2": 20,
+  "devnew-arts-known-choice-k3": 20,
+  "devnew-arts-known-noul": 19,
+  "devnew-arts-known-noul-k2": 20,
+  "devnew-arts-known-noul-k3": 20,
+  "devnew-arts-known-score": 20,
+  "devnew-arts-known-score-k2": 20,
+  "devnew-arts-known-score-k3": 20,
+  "devnew-language-known-choice": 20,
+  "devnew-language-known-choice-k2": 20,
+  "devnew-language-known-noul": 19,
+  "devnew-language-known-score": 18,
+  "devnew-language-known-score-k2": 20,
+  "devnew-language-known-score-k5": 20,
+  "devnew-reasoning-known-choice": 20,
+  "devnew-reasoning-known-choice-k2": 20,
+  "devnew-reasoning-known-noul": 20,
+  "devnew-reasoning-known-noul-k2": 20,
+  "devnew-reasoning-known-noul-k3": 20,
+  "devnew-reasoning-known-score": 19,
+  "devnew-reasoning-known-score-k2": 20,
+  "devnew-reasoning-known-score-k3": 20,
+  "devnew-retrieval-known-choice": 20,
+  "devnew-retrieval-known-choice-k2": 19,
+  "devnew-retrieval-known-noul": 20,
+  "devnew-retrieval-known-score": 20,
+  "devnew-retrieval-known-score-k2": 20,
+  "devnew-tools-known-choice": 20,
+  "devnew-tools-known-choice-k2": 20,
+  "devnew-tools-known-noul": 20,
+  "devnew-tools-known-noul-k2": 20,
+  "devnew-tools-known-score": 20,
+  "devnew-tools-known-score-k2": 20,
+  "language-known-choice-s1": 293,
+  "language-known-noul-k2": 145,
+  "language-known-score-k6": 137,
+  "reasoning-known-choice-k3": 269,
+  "reasoning-known-noul-k6": 124,
+  "reasoning-known-score-k6": 259,
+  "retrieval-known-choice-k6": 112,
+  "retrieval-known-noul-k2": 128,
+  "retrieval-known-score-k6": 269,
+  "tools-known-choice-k6": 280,
+  "tools-known-noul-k6": 315,
+  "tools-known-score-k6": 261
+ },
+ "skipped": {
+  "equals a public seed": 2
+ }
+}
+3643 data/cases-big/dev.jsonl
+== big-dev: finished 17:04:53
+== soup: starting 17:04:53
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1317.62it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:04<00:00,  4.20s/it]Fetching 1 files: 100%|██████████| 1/1 [00:04<00:00,  4.20s/it]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [00:00<00:00,  5.09it/s]Fetching 2 files: 100%|██████████| 2/2 [00:04<00:00,  2.78s/it]Fetching 2 files: 100%|██████████| 2/2 [00:04<00:00,  2.39s/it]
+built data/soup-s2 from 2 bodies on /workspace/.cache/huggingface/hub/models--vllm-sr--d3-lite/snapshots/03560c26f5199c3c04129a2ccb38960c913635e0
+== soup: finished 17:05:09
+== pin-pool: starting 17:05:09
+{
+ "pin_pool": 15000,
+ "relay_dropped": {
+  "non-train split": 2102,
+  "held out by the exam": 3274
+ }
+}
+== pin-pool: finished 17:05:18
+== pin: starting 17:05:18
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  35%|███▍      | 164/473 [00:00<00:00, 1632.45it/s]Loading weights:  71%|███████   | 335/473 [00:00<00:00, 1673.73it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1838.15it/s]
+1000/15000 answered, 13.3/s
+2000/15000 answered, 17.3/s
+3000/15000 answered, 19.1/s
+4000/15000 answered, 20.2/s
+5000/15000 answered, 20.9/s
+6000/15000 answered, 21.3/s
+7000/15000 answered, 21.6/s
+8000/15000 answered, 21.9/s
+9000/15000 answered, 22.2/s
+10000/15000 answered, 22.4/s
+11000/15000 answered, 22.5/s
+12000/15000 answered, 22.7/s
+13000/15000 answered, 22.8/s
+14000/15000 answered, 22.9/s
+15000/15000 answered, 22.9/s
+== pin: finished 17:16:31
+== assemble: starting 17:16:31
+{
+ "rows": 88815,
+ "parts": {
+  "generated and datasets": 33817,
+  "generated and datasets: dropped (duplicate or in dev)": 2,
+  "pin": 14999,
+  "pin: dropped (duplicate or in dev)": 1,
+  "relay": 39999,
+  "relay: dropped (duplicate or in dev)": 1
+ },
+ "types": {
+  "choice": 51761,
+  "score": 16753,
+  "noul": 20301
+ },
+ "relay_dropped": {
+  "non-train split": 2102,
+  "held out by the exam": 3274
+ },
+ "sha256": "1ae7ce04d75937a5b9160e2a491e345086caa6e41c6fc2575a6cc06845a22ce0"
+}
+== assemble: finished 17:16:44
+== speedtest: starting 17:16:44
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  25%|██▌       | 120/473 [00:00<00:00, 1199.04it/s]Loading weights:  55%|█████▍    | 259/473 [00:00<00:00, 1307.61it/s]Loading weights:  98%|█████████▊| 464/473 [00:00<00:00, 1639.28it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1553.31it/s]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/root/.zils/zils/zils/teacher.py", line 324, in <module>
+    main()
+  File "/root/.zils/zils/zils/teacher.py", line 320, in main
+    {"answer": answer, "train": train, "soup": soup}[args.command](args)
+  File "/root/.zils/zils/zils/teacher.py", line 163, in train
+    load_candidate(model, Path(args.start), model.meta["model"])
+  File "/root/.zils/zils/zils/teacher.py", line 246, in load_candidate
+    d3.validate_candidate(path, profile)
+  File "/root/.zils/zils/zils/d3.py", line 309, in validate_candidate
+    raise ValueError(f"base candidate contains an unexpected entry: {entry.name}")
+ValueError: base candidate contains an unexpected entry: __pycache__
+== install: already done
+== gpu-check: already done
+== reference: already done
+== qwen: already done
+== relay: already done
+== big-dev: already done
+== soup: already done
+== pin-pool: already done
+== pin: already done
+== assemble: already done
+== speedtest: starting 18:29:12
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  32%|███▏      | 153/473 [00:00<00:00, 1523.05it/s]Loading weights:  66%|██████▌   | 311/473 [00:00<00:00, 1550.64it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1779.12it/s]
+{"train": 500, "held_out_kl": 0.25915298935690834, "steps": 32}
+{"step": 32, "of": 32, "held_out_kl": 0.2485649320318771}
+speed test: 500 rows, load and save included, in 180 s
+peak GPU memory: 6788 MiB, 28 %
+== speedtest: finished 18:32:12
+== baseline-models: starting 18:32:12
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1178.59it/s]
+Fetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 3 files:  67%|██████▋   | 2/3 [00:00<00:00,  7.61it/s]Fetching 3 files: 100%|██████████| 3/3 [00:00<00:00,  5.45it/s]Fetching 3 files: 100%|██████████| 3/3 [00:00<00:00,  5.77it/s]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [00:02<00:02,  2.07s/it]Fetching 2 files: 100%|██████████| 2/2 [00:04<00:00,  2.51s/it]Fetching 2 files: 100%|██████████| 2/2 [00:04<00:00,  2.44s/it]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [00:00<00:00,  2.43it/s]Fetching 2 files: 100%|██████████| 2/2 [00:03<00:00,  2.20s/it]Fetching 2 files: 100%|██████████| 2/2 [00:03<00:00,  1.93s/it]
+built data/soup-house from 3 bodies on /workspace/.cache/huggingface/hub/models--vllm-sr--d3-lite/snapshots/03560c26f5199c3c04129a2ccb38960c913635e0
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1152.62it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 290.95it/s]
+built data/cand-T from 1 bodies on /workspace/.cache/huggingface/hub/models--vllm-sr--d3-lite/snapshots/03560c26f5199c3c04129a2ccb38960c913635e0
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1242.53it/s]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 329.26it/s]
+built data/cand-D from 1 bodies on /workspace/.cache/huggingface/hub/models--vllm-sr--d3-lite/snapshots/03560c26f5199c3c04129a2ccb38960c913635e0
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1364.98it/s]
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 4 files:  25%|██▌       | 1/4 [00:00<00:01,  2.69it/s]Fetching 4 files:  50%|█████     | 2/4 [00:02<00:03,  1.65s/it]Fetching 4 files:  75%|███████▌  | 3/4 [00:03<00:01,  1.25s/it]Fetching 4 files: 100%|██████████| 4/4 [00:04<00:00,  1.05s/it]Fetching 4 files: 100%|██████████| 4/4 [00:04<00:00,  1.11s/it]
+built data/tmp-h4 from 1 bodies on /workspace/.cache/huggingface/hub/models--vllm-sr--d3-lite/snapshots/03560c26f5199c3c04129a2ccb38960c913635e0
+== baseline-models: finished 18:32:51
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  33%|███▎      | 155/473 [00:00<00:00, 1540.92it/s]Loading weights:  66%|██████▌   | 311/473 [00:00<00:00, 1549.11it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1766.55it/s]
+house: 3643 rows
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  25%|██▍       | 118/473 [00:00<00:00, 1174.24it/s]Loading weights:  59%|█████▉    | 279/473 [00:00<00:00, 1426.47it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1615.17it/s]
+T: 3643 rows
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  25%|██▍       | 117/473 [00:00<00:00, 1164.47it/s]Loading weights:  58%|█████▊    | 275/473 [00:00<00:00, 1406.76it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1660.82it/s]
+D: 3643 rows
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  26%|██▋       | 125/473 [00:00<00:00, 1230.80it/s]Loading weights:  62%|██████▏   | 291/473 [00:00<00:00, 1476.70it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1695.16it/s]
+S2: 3643 rows
+model            score  temperature
+house            40.85        1.778
+T                54.73        1.585
+D                63.39        1.359
+S2               60.79        1.413
+
+By category:
+                reasoning   language  retrieval      tools       arts
+house                0.30       0.60       0.43       0.36       0.25
+T                    0.31       0.65       0.56       0.84       0.35
+D                    0.64       0.71       0.66       0.57       0.47
+S2                   0.44       0.70       0.65       0.77       0.43
+
+Does the dev set reproduce the known order? If not, fix it before trusting it.
+  [PASS] S2 above T: +6.00 [+4.80, +7.45]
+  [PASS] T above house: +13.87 [+12.40, +15.16]
+  [FAIL] S2 above D: -2.50 [-3.54, -1.40]
+  [PASS] D above house: +22.37 [+20.24, +24.50]
+
+3 of 4 checks passed. Only 'known' and stand-in 'new' dev families are covered, so a pass is necessary, not sufficient.
+baseline: some order checks failed; read them before trusting later scores
+== train-v1: starting 18:43:29
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  45%|████▍     | 212/473 [00:00<00:00, 2117.80it/s]Loading weights:  91%|█████████ | 431/473 [00:00<00:00, 2159.21it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 2128.32it/s]
+{"train": 87815, "held_out_kl": 0.25915298935690834, "steps": 5489}
+{"step": 500, "of": 5489, "held_out_kl": 0.2093638033232916}
+{"step": 1000, "of": 5489, "held_out_kl": 0.20659525696726025}
+{"step": 1500, "of": 5489, "held_out_kl": 0.21174358577577343}
+{"step": 2000, "of": 5489, "held_out_kl": 0.19831064381032168}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/root/.zils/zils/zils/teacher.py", line 324, in <module>
+    main()
+  File "/root/.zils/zils/zils/teacher.py", line 320, in main
+    {"answer": answer, "train": train, "soup": soup}[args.command](args)
+  File "/root/.zils/zils/zils/teacher.py", line 217, in train
+    (kl(model, *r) / len(batch)).backward()
+     ^^^^^^^^^^^^^
+  File "/root/.zils/zils/zils/teacher.py", line 103, in kl
+    student = torch.log_softmax(model.logits(ids, len(keys)), -1)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/zils/d3.py", line 652, in logits
+    hidden = self.runtime.encoder(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.cache/huggingface/hub/models--vllm-sr--d3-lite/snapshots/03560c26f5199c3c04129a2ccb38960c913635e0/d3_runtime.py", line 1064, in __call__
+    hidden = layer(
+             ^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/transformers/modeling_layers.py", line 109, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 889, in forward
+    hidden_states = self.linear_attn(
+                    ^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/transformers/integrations/accelerate.py", line 1010, in wrapped
+    output = forward_func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 565, in forward
+    mixed_qkv = self.in_proj_qkv(hidden_states)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/peft/tuners/lora/layer.py", line 1102, in forward
+    result = result + lora_B(lora_A(dropout(x))) * scaling
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 90.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 95.12 MiB is free. Including non-PyTorch memory, this process has 9.02 GiB memory in use. Process 33443 has 7.92 GiB memory in use. Process 40558 has 6.47 GiB memory in use. Of the allocated memory 8.44 GiB is allocated by PyTorch, and 118.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

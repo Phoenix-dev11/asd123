@@ -1,0 +1,60 @@
+ },
+ "sha256": "9103a8805752eca2f263c3f06b5ca8c2e70b9b464911fe14762f5922f7fd325b"
+}
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  38%|███▊      | 181/473 [00:00<00:00, 1804.65it/s]Loading weights:  83%|████████▎ | 393/473 [00:00<00:00, 1984.71it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 2056.87it/s]
+{"train": 85795, "held_out_kl": 0.36861106627699736, "steps": 5363}
+{"step": 500, "of": 5363, "held_out_kl": 0.2800245850392791}
+{"step": 1000, "of": 5363, "held_out_kl": 0.18227067441128497}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/root/.zils/zils/zils/teacher.py", line 324, in <module>
+    main()
+  File "/root/.zils/zils/zils/teacher.py", line 320, in main
+    {"answer": answer, "train": train, "soup": soup}[args.command](args)
+  File "/root/.zils/zils/zils/teacher.py", line 217, in train
+    (kl(model, *r) / len(batch)).backward()
+     ^^^^^^^^^^^^^
+  File "/root/.zils/zils/zils/teacher.py", line 103, in kl
+    student = torch.log_softmax(model.logits(ids, len(keys)), -1)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/zils/d3.py", line 652, in logits
+    hidden = self.runtime.encoder(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.cache/huggingface/hub/models--vllm-sr--d3-lite/snapshots/03560c26f5199c3c04129a2ccb38960c913635e0/d3_runtime.py", line 1064, in __call__
+    hidden = layer(
+             ^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/transformers/modeling_layers.py", line 109, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 889, in forward
+    hidden_states = self.linear_attn(
+                    ^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/transformers/integrations/accelerate.py", line 1010, in wrapped
+    output = forward_func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 659, in forward
+    core_attn_out = self.norm(core_attn_out, z)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.zils/zils/.venv-d3/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 232, in forward
+    hidden_states = hidden_states * ACT2FN[self.activation](gate.to(torch.float32))
+                    ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 22.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 13.12 MiB is free. Including non-PyTorch memory, this process has 8.28 GiB memory in use. Process 30150 has 7.29 GiB memory in use. Process 33443 has 7.92 GiB memory in use. Of the allocated memory 7.71 GiB is allocated by PyTorch, and 104.99 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

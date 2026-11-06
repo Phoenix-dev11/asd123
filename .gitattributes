@@ -1,0 +1,6 @@
+*.safetensors filter=lfs diff=lfs merge=lfs -text
+data/relay/answers.jsonl filter=lfs diff=lfs merge=lfs -text
+data/relay/rebuilt.jsonl filter=lfs diff=lfs merge=lfs -text
+data/train.jsonl filter=lfs diff=lfs merge=lfs -text
+data/train-v2.jsonl filter=lfs diff=lfs merge=lfs -text
+data/train-v3.jsonl filter=lfs diff=lfs merge=lfs -text

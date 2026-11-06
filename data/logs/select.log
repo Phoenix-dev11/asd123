@@ -1,0 +1,170 @@
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1265.87it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 308.40it/s]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 329.83it/s]
+built data/select/soup-v3 from 3 bodies on /workspace/.cache/huggingface/hub/models--vllm-sr--d3-lite/snapshots/03560c26f5199c3c04129a2ccb38960c913635e0
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  40%|████      | 191/473 [00:00<00:00, 1904.90it/s]Loading weights:  85%|████████▌ | 404/473 [00:00<00:00, 2035.58it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 2081.64it/s]
+me-v3: 4177 rows
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  22%|██▏       | 106/473 [00:00<00:00, 1053.27it/s]Loading weights:  53%|█████▎    | 252/473 [00:00<00:00, 1289.27it/s]Loading weights:  99%|█████████▉| 469/473 [00:00<00:00, 1687.93it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1564.61it/s]
+S3-v3: 4177 rows
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1333.57it/s]
+body 7841459577387066493c1a02af136719491bbcd9954b860735d6500f6d17ed86 passes the local checks for d3-lite: data/select/body-v3
+Files: README.md, model-00001-of-00001.safetensors, model.safetensors.index.json
+=== copy check v3
+{
+ "relative_change_from_parent": 0.0505857593276364,
+ "own_change_from_soup": 21.332523718416624,
+ "own_change_from_house_average": 22.006963107421097,
+ "cosine_with_members_own_change": {
+  "data/bodies/thermopylae-777__zils-lite-body-2/618946d00aea": 0.0007203802148148594,
+  "data/bodies/dasLOL__zils-lite-skills-v5/2c9920558bcd": 0.007455616288965425
+ },
+ "measured_from": "soup",
+ "own_change": 21.332523718416624,
+ "scenarios": {
+  "soup unchanged": {
+   "copy_check": "accepted",
+   "residual": 0.7742443723484815,
+   "explained": 0.22575562765151838,
+   "gate_applies": false
+  },
+  "data/bodies/thermopylae-777__zils-lite-body-2/618946d00aea alone": {
+   "copy_check": "accepted",
+   "residual": 0.7889587915645593,
+   "explained": 0.2110412084354406,
+   "gate_applies": false
+  }
+ },
+ "problems": []
+}
+
+OK to commit on this check.
+=== ranking
+soup S2 59.13; 14 data sources with 20+ items
+candidate        solo   gain  low95  in soup   gain  low95  better  worse  seat crown
+me-v3           62.72  +3.46  +1.98    63.31  +4.23  +3.67       7      6  yes  yes
+Local scores compare candidates; they do not predict the live exam's numbers.
+SELECT-DONE
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1663.11it/s]
+built data/avg-v2-v3 from 2 bodies on /workspace/.cache/huggingface/hub/models--vllm-sr--d3-lite/snapshots/03560c26f5199c3c04129a2ccb38960c913635e0
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1375.61it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 265.29it/s]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 387.97it/s]
+built data/select/soup-v2 from 3 bodies on /workspace/.cache/huggingface/hub/models--vllm-sr--d3-lite/snapshots/03560c26f5199c3c04129a2ccb38960c913635e0
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  33%|███▎      | 157/473 [00:00<00:00, 1554.92it/s]Loading weights:  66%|██████▌   | 313/473 [00:00<00:00, 1512.41it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1730.70it/s]
+me-v2: 4177 rows
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  22%|██▏       | 104/473 [00:00<00:00, 1038.74it/s]Loading weights:  53%|█████▎    | 249/473 [00:00<00:00, 1279.71it/s]Loading weights:  98%|█████████▊| 465/473 [00:00<00:00, 1654.87it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1545.36it/s]
+S3-v2: 4177 rows
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1371.55it/s]
+body 675318809ff62a312c8803fa9647d42933c825e5119183dd52997a717ad0829d passes the local checks for d3-lite: data/select/body-v2
+Files: README.md, model-00001-of-00001.safetensors, model.safetensors.index.json
+=== copy check v2
+{
+ "relative_change_from_parent": 0.03238223501339487,
+ "own_change_from_soup": 10.445828579519898,
+ "own_change_from_house_average": 11.737861285989021,
+ "cosine_with_members_own_change": {
+  "data/bodies/thermopylae-777__zils-lite-body-2/618946d00aea": 0.0011404824012010827,
+  "data/bodies/dasLOL__zils-lite-skills-v5/2c9920558bcd": 0.006037035771828001
+ },
+ "measured_from": "soup",
+ "own_change": 10.445828579519898,
+ "scenarios": {
+  "soup unchanged": {
+   "copy_check": "accepted",
+   "residual": 0.45302729082015314,
+   "explained": 0.5469727091798464,
+   "gate_applies": true
+  },
+  "data/bodies/thermopylae-777__zils-lite-body-2/618946d00aea alone": {
+   "copy_check": "accepted",
+   "residual": 0.4867578431717845,
+   "explained": 0.5132421568282157,
+   "gate_applies": true
+  }
+ },
+ "problems": []
+}
+
+OK to commit on this check.
+me-v3: 4177 rows
+S3-v3: 4177 rows
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1277.08it/s]
+body 7841459577387066493c1a02af136719491bbcd9954b860735d6500f6d17ed86 passes the local checks for d3-lite: data/select/body-v3
+Files: README.md, model-00001-of-00001.safetensors, model.safetensors.index.json
+=== copy check v3
+{
+ "relative_change_from_parent": 0.0505857593276364,
+ "own_change_from_soup": 21.332523718416624,
+ "own_change_from_house_average": 22.006963107421097,
+ "cosine_with_members_own_change": {
+  "data/bodies/thermopylae-777__zils-lite-body-2/618946d00aea": 0.0007203802148148594,
+  "data/bodies/dasLOL__zils-lite-skills-v5/2c9920558bcd": 0.007455616288965425
+ },
+ "measured_from": "soup",
+ "own_change": 21.332523718416624,
+ "scenarios": {
+  "soup unchanged": {
+   "copy_check": "accepted",
+   "residual": 0.7742443723484815,
+   "explained": 0.22575562765151838,
+   "gate_applies": false
+  },
+  "data/bodies/thermopylae-777__zils-lite-body-2/618946d00aea alone": {
+   "copy_check": "accepted",
+   "residual": 0.7889587915645593,
+   "explained": 0.2110412084354406,
+   "gate_applies": false
+  }
+ },
+ "problems": []
+}
+
+OK to commit on this check.
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1475.94it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 319.13it/s]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 388.43it/s]
+built data/select/soup-avg-v2-v3 from 3 bodies on /workspace/.cache/huggingface/hub/models--vllm-sr--d3-lite/snapshots/03560c26f5199c3c04129a2ccb38960c913635e0
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  32%|███▏      | 153/473 [00:00<00:00, 1514.29it/s]Loading weights:  65%|██████▍   | 307/473 [00:00<00:00, 1525.79it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1798.42it/s]
+me-avg-v2-v3: 4177 rows
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  23%|██▎       | 111/473 [00:00<00:00, 1085.63it/s]Loading weights:  59%|█████▉    | 278/473 [00:00<00:00, 1418.99it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1665.10it/s]
+S3-avg-v2-v3: 4177 rows
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1514.03it/s]
+body 339a002a839a1ad2c45923cfde7b34c07696e639dab4f1786ff9d11d74d0f7f3 passes the local checks for d3-lite: data/select/body-avg-v2-v3
+Files: README.md, model-00001-of-00001.safetensors, model.safetensors.index.json
+=== copy check avg-v2-v3
+{
+ "relative_change_from_parent": 0.03538083802561239,
+ "own_change_from_soup": 12.462585315118588,
+ "own_change_from_house_average": 13.574305236523049,
+ "cosine_with_members_own_change": {
+  "data/bodies/thermopylae-777__zils-lite-body-2/618946d00aea": 0.0010937618518671432,
+  "data/bodies/dasLOL__zils-lite-skills-v5/2c9920558bcd": 0.008908999811590147
+ },
+ "measured_from": "soup",
+ "own_change": 12.462585315118588,
+ "scenarios": {
+  "soup unchanged": {
+   "copy_check": "accepted",
+   "residual": 0.5401660971992547,
+   "explained": 0.4598339028007452,
+   "gate_applies": false
+  },
+  "data/bodies/thermopylae-777__zils-lite-body-2/618946d00aea alone": {
+   "copy_check": "accepted",
+   "residual": 0.5693320193682463,
+   "explained": 0.43066798063175354,
+   "gate_applies": false
+  }
+ },
+ "problems": []
+}
+
+OK to commit on this check.
+=== ranking
+soup S2 59.13; 14 data sources with 20+ items
+candidate        solo   gain  low95  in soup   gain  low95  better  worse  seat crown
+me-v3           62.72  +3.46  +1.98    63.31  +4.23  +3.67       7      6  yes  yes
+me-avg-v2-v3    65.11  +5.97  +4.65    63.14  +4.03  +3.46       6      5  yes  yes
+me-v2           65.83  +6.61  +5.02    62.39  +3.26  +2.66       6      5  yes  yes
+Local scores compare candidates; they do not predict the live exam's numbers.
+SELECT-DONE

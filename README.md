@@ -27,8 +27,8 @@ Use a 24 GB RTX 4090 with a driver that supports CUDA 13.0, about 200 GB of disk
 Keep only a hotkey on this box, never a coldkey.
 
 ```bash
-curl -fsSL https://zils.ai/install.sh | sh     # asks for your wallet and repo at the end
-zils-miner setup --network finney --netuid 127 --model d3-lite-0.8b-v1
+curl -fsSL https://zils.ai/install.sh -o /tmp/zils-install.sh   # read it first
+ZILS_SKIP_SETUP=1 sh /tmp/zils-install.sh     # builds .venv-kev and .venv-d3; no wallet needed to train
 # copy this folder to the box, then from inside it:
 . ./env.sh
 "$PY" -m zils.d3 reference --model d3-lite-0.8b-v1 --out data/lite-ref
@@ -45,11 +45,11 @@ row. Read it first: it was not run while building this kit.
 mkdir -p data/relay && cd data/relay
 hf download zils-ai/zils-relay-answers --repo-type dataset --local-dir . \
   --include answers.jsonl --include rebuild.py
-"$PY" rebuild.py --records answers.jsonl --out rebuilt.jsonl
+"$RELAY_PY" rebuild.py --records answers.jsonl --out rebuilt.jsonl
 cd -
 ```
 
-It needs `huggingface_hub` and `pyarrow`; install them if `$PY` lacks them. Without relay answers
+`$RELAY_PY` is the miner runtime, which has `huggingface_hub` and `pyarrow`. Without relay answers
 `assemble.py` still runs and warns, but that mix lacks the teacher data both winning bodies used.
 
 ## Step 2: build the soup and train
@@ -117,7 +117,8 @@ There is no other route, and no port or validator address is needed. Validators 
 then download from huggingface.co with no login.
 
 First, from a machine holding the coldkey, register a fresh hotkey on netuid 127 following
-`docs/bittensor-registration.md`, then copy only the hotkey file to the GPU box.
+`docs/bittensor-registration.md`, then copy only the hotkey file to the GPU box and run
+`zils-miner setup --network finney --netuid 127 --model d3-lite-0.8b-v1` there.
 
 ```bash
 REPO=YOU/REPO; BODY=data/body-v1

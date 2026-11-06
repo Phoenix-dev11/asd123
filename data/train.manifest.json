@@ -1,0 +1,21 @@
+{
+ "rows": 88815,
+ "parts": {
+  "generated and datasets": 33817,
+  "generated and datasets: dropped (duplicate or in dev)": 2,
+  "pin": 14999,
+  "pin: dropped (duplicate or in dev)": 1,
+  "relay": 39999,
+  "relay: dropped (duplicate or in dev)": 1
+ },
+ "types": {
+  "choice": 51761,
+  "score": 16753,
+  "noul": 20301
+ },
+ "relay_dropped": {
+  "non-train split": 2102,
+  "held out by the exam": 3274
+ },
+ "sha256": "1ae7ce04d75937a5b9160e2a491e345086caa6e41c6fc2575a6cc06845a22ce0"
+}

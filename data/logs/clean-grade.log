@@ -1,0 +1,8 @@
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  36%|███▌      | 171/473 [00:00<00:00, 1654.70it/s]Loading weights:  71%|███████   | 337/473 [00:00<00:00, 1566.37it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1738.33it/s]
+house: 4177 rows
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  24%|██▍       | 113/473 [00:00<00:00, 1116.76it/s]Loading weights:  58%|█████▊    | 273/473 [00:00<00:00, 1381.83it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1566.64it/s]
+T: 4177 rows
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  20%|█▉        | 93/473 [00:00<00:00, 921.96it/s]Loading weights:  52%|█████▏    | 248/473 [00:00<00:00, 1284.02it/s]Loading weights:  98%|█████████▊| 464/473 [00:00<00:00, 1678.79it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1538.73it/s]
+D: 4177 rows
+Loading weights:   0%|          | 0/473 [00:00<?, ?it/s]Loading weights:  32%|███▏      | 150/473 [00:00<00:00, 1498.20it/s]Loading weights:  65%|██████▍   | 306/473 [00:00<00:00, 1524.90it/s]Loading weights: 100%|██████████| 473/473 [00:00<00:00, 1763.79it/s]
+S2: 4177 rows
