@@ -162,6 +162,33 @@ class GeneratorsAreConsistent(unittest.TestCase):
         self.assertEqual(max(soft, key=soft.get), "1")
 
 
+class RaceCasesMatchTheExam(unittest.TestCase):
+    def test_outcomes_shape_and_labels(self):
+        rng = random.Random(11)
+        made = [g.race_case(rng, family) for family in g.RACE_TRAIN for _ in range(3)]
+        self.assertEqual({c["family"] for c in made}, set(g.RACE_TRAIN))
+        for case in made:
+            self.assertIn(case["block"], ("known", "new"))
+            self.assertIn(case["category"], ("reasoning", "language", "retrieval", "tools", "arts"))
+            keys = case["question"].get("criteria")
+            if case["question"]["type"] == "noul":
+                self.assertIn(case["label"], ("true", "false"))
+            else:
+                self.assertIn(case["label"], keys)
+        accepted = [c for c in made if c["family"].startswith("stackexchange-accepted-")]
+        for case in accepted:
+            self.assertEqual(case["block"], "new")
+            self.assertIn("Answer A:", case["state"]["text"])
+            letter = case["label"]
+            self.assertIn(f"Answer {letter}:", case["state"]["text"])
+
+    def test_revert_label_follows_the_edit(self):
+        rng = random.Random(4)
+        labels = [g.gen_revert(rng)["label"] for _ in range(200)]
+        self.assertGreater(labels.count("true"), 40)
+        self.assertGreater(labels.count("false"), 40)
+
+
 class DevSetIsScorable(unittest.TestCase):
     def test_seed_rows_keep_meaning_when_rekeyed(self):
         case = {

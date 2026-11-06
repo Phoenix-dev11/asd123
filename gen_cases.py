@@ -4,6 +4,9 @@
 Writes <out>/train.jsonl and <out>/dev.jsonl plus <out>/manifest.json. A generated instance or a
 source row goes to exactly one split, routed by a hash of its key, so dev never overlaps training.
 
+`--resample` rebuilds an existing cases directory so row counts follow the race score weights
+and adds Outcomes-shaped tasks (wiki reverts, Stack Exchange, arXiv, Articles for Creation).
+
 Rules this script enforces:
 - Dataset rows come only from splits the exam-authoring code does not draw from: CMUdict, PIQA, 20
   Newsgroups, GLUE, Social IQa, emotion and Sarcasm train splits, CxC validation, and the Stack
@@ -141,14 +144,14 @@ def syllables(phonemes):
 # ---- Case building -------------------------------------------------------------------------------
 
 
-def make(family, category, state, question, label, source, soft=None):
+def make(family, category, state, question, label, source, soft=None, block="known"):
     text = state if isinstance(state, str) else json.dumps(state)
     body = json.dumps([family, text, question, label], sort_keys=True)
     case = {
         "id": "kit-" + hashlib.sha256(body.encode()).hexdigest()[:24],
         "family": family,
         "category": category,
-        "block": "known",
+        "block": block,
         "source_id": source,
         "state": {"text": text},
         "question": question,
@@ -603,6 +606,351 @@ def seed_dev_cases(root):
 
 # ---- Main ----------------------------------------------------------------------------------------
 
+# Train rows kept from the fixed bank, per live family. Counts follow the score weights
+# (reasoning 0.2585, language 0.2585, retrieval 0.2002, tools 0.1828, arts 0.10) and stay
+# inside what data/cases already holds. Retired families such as arts-known-choice-k3 are absent:
+# they are not in the live known set, so rows spent on them do not move the race score.
+BANK_TRAIN = {
+    "reasoning-known-choice-k3": 1800,
+    "reasoning-known-noul-k6": 1379,
+    "reasoning-known-score-k6": 1800,
+    "language-known-choice-s1": 1800,
+    "language-known-noul-k2": 1375,
+    "language-known-score-k6": 1366,
+    "retrieval-known-choice-k6": 1200,
+    "retrieval-known-noul-k2": 1200,
+    "retrieval-known-score-k6": 1400,
+    "tools-known-choice-k6": 1100,
+    "tools-known-noul-k6": 1100,
+    "tools-known-score-k6": 1100,
+    "arts-known-noul-k5": 700,
+    "arts-known-score-k6": 700,
+    "arts-known-choice-k6": 700,
+}
+
+# Outcomes-shaped rows. Family names and question text match zils.current_items.STREAMS.
+# Wikipedia reverts stay under the exam's 20% group cap of this slice, arXiv under 15%.
+# stackexchange-score and wikipedia-afd are left out: the exam's quality defaults exclude them.
+RACE_TRAIN = {
+    "wikipedia-revert": 1200,
+    "wikipedia-revert-de": 100,
+    "wikipedia-revert-fr": 100,
+    "wikipedia-revert-es": 100,
+    "wikipedia-revert-ja": 100,
+    "wikidata-revert": 500,
+    "stackexchange-closed-reasoning": 323,
+    "stackexchange-closed-language": 323,
+    "stackexchange-closed-retrieval": 250,
+    "stackexchange-closed-tools": 229,
+    "stackexchange-closed-arts": 125,
+    "arxiv-category-cs": 250,
+    "arxiv-category-math": 150,
+    "arxiv-category-physics": 150,
+    "arxiv-category-other": 100,
+    "stackexchange-accepted-reasoning": 2102,
+    "stackexchange-accepted-language": 3102,
+    "stackexchange-accepted-retrieval": 2402,
+    "stackexchange-accepted-tools": 2194,
+    "stackexchange-accepted-arts": 1200,
+    "wikipedia-afc": 1000,
+}
+
+WIKI_NAMES = {
+    "wikipedia-revert": "English Wikipedia",
+    "wikipedia-revert-de": "German Wikipedia",
+    "wikipedia-revert-fr": "French Wikipedia",
+    "wikipedia-revert-es": "Spanish Wikipedia",
+    "wikipedia-revert-ja": "Japanese Wikipedia",
+}
+REVERT_Q = "Will this Wikipedia article edit be reverted by another edit?"
+WIKIDATA_Q = "Will this Wikidata item edit be reverted by another edit?"
+CLOSED_Q = (
+    "Will this newly asked Stack Exchange question be closed "
+    "(as a duplicate, off-topic, unclear, too broad or opinion-based)?"
+)
+ACCEPTED_Q = "The asker of this Stack Exchange question accepted one of these answers. Which one?"
+ARXIV_Q = (
+    "This paper was just submitted to arXiv. Which category was it announced under as its primary subject?"
+)
+AFC_Q = (
+    "This draft was submitted for review at English Wikipedia's Articles for Creation. "
+    "Will the reviewer accept it as a new article?"
+)
+NOUL = {"true": "Yes", "false": "No"}
+
+
+def _race(family, category, block, text, question, label, source):
+    return make(family, category, text, question, label, source, block=block)
+
+
+def _noul(instructions, true_text, false_text):
+    return {
+        "type": "noul",
+        "instructions": instructions,
+        "criteria": {"true": true_text, "false": false_text},
+    }
+
+
+def gen_revert(rng, family="wikipedia-revert"):
+    """An edit in the Outcomes wiki layout. The label follows the visible edit, not the summary."""
+    subjects = [
+        "orbit", "harbour", "crystal", "novel", "lane", "equation", "island", "leaf", "engine", "monsoon",
+    ]
+    facts = [
+        "The value recorded for {name} in {year} is {n}.",
+        "{name} is described in the {year} survey, section {n}.",
+        "A {year} measurement puts {name} at {n} units.",
+    ]
+    name = rng.choice(["Kepler", "Osaka", "Shelley", "Hokkaido", "Lovelace", "Ada", "Sodium", "Monsoon"])
+    year, n = rng.randint(1990, 2020), rng.randint(2, 80)
+    fact = rng.choice(facts).format(name=name, year=year, n=n)
+    article = f"{name} {rng.choice(subjects)}"
+    kind = rng.choice(["vandal", "blank", "typo", "cite", "restore"])
+    if kind == "vandal":
+        added = rng.choice(["asdfasdf buy followers", "YOU ARE ALL WRONG LOL", "visit spam.example"])
+        removed, summary, editor, minor, label = fact, "edit", "IP address", False, "true"
+    elif kind == "blank":
+        added, removed = "(nothing)", fact
+        summary, editor, minor, label = "(none)", "registered account", False, "true"
+    elif kind == "typo":
+        added, removed = fact.replace(str(year), str(year)), fact.replace(name, name[:-1])
+        summary, editor, minor, label = "typo", "registered account", True, "false"
+    elif kind == "cite":
+        added, removed = fact + f" [ref: Survey, {year}]", "(nothing)"
+        summary, editor, minor, label = "add source", "registered account", False, "false"
+    else:
+        added, removed = fact, rng.choice(["asdfasdf buy followers", "YOU ARE ALL WRONG LOL"])
+        summary, editor, minor, label = "reverted vandalism", "registered account", False, "false"
+    old = rng.randint(800, 9000)
+    text = (
+        f"Wiki: {WIKI_NAMES[family]}\nArticle: {article}\n"
+        f"Edit summary: {summary}\n"
+        f"Size change: {len(added) - len(removed):+d} bytes ({old} -> {old + len(added) - len(removed)})\n"
+        f"Minor edit: {'yes' if minor else 'no'}\nEditor: {editor}\n"
+        f"\nRemoved:\n- {removed}\n\nAdded:\n+ {added}"
+    )
+    question = _noul(REVERT_Q, "Reverted", "Not reverted")
+    return _race(family, "language", "known", text, question, label, "race:wiki-revert")
+
+
+def gen_wikidata(rng):
+    items = [
+        ("Douglas Adams", "Q42"), ("Osaka", "Q35765"), ("sodium chloride", "Q42243"),
+        ("Mary Shelley", "Q47152"), ("photosynthesis", "Q8555"),
+    ]
+    name, qid = rng.choice(items)
+    year, old = rng.randint(1800, 2010), rng.randint(400, 5000)
+    kind = rng.choice(["vandal", "claim", "blank"])
+    if kind == "vandal":
+        added, removed = "best human ever lol", f"label: {name}"
+        summary, label = "set label (update)", "true"
+    elif kind == "blank":
+        added, removed = "(nothing)", f"Property / date of birth: {year}"
+        summary, label = "remove claims (remove)", "true"
+    else:
+        added, removed = f"Property / country of citizenship: country-{year}", "(nothing)"
+        summary, label = "set claim (create)", "false"
+    change = len(added) - len(removed)
+    text = (
+        f"Wiki: Wikidata\nItem: {name} ({qid})\nEdit summary: {summary}\n"
+        f"Size change: {change:+d} bytes ({old} -> {old + change})\n"
+        f"Minor edit: no\nEditor: registered account\n"
+        f"\nRemoved:\n- {removed}\n\nAdded:\n+ {added}"
+    )
+    question = _noul(WIKIDATA_Q, "Reverted", "Not reverted")
+    return _race("wikidata-revert", "retrieval", "known", text, question, label, "race:wikidata")
+
+
+def gen_closed(rng, category):
+    """A question is closed when it names no answerable problem. An open one names one."""
+    sites = {
+        "tools": ("Stack Overflow", "python"),
+        "language": ("English Language & Usage Stack Exchange", "grammar"),
+        "reasoning": ("Mathematics Stack Exchange", "arithmetic"),
+        "retrieval": ("History Stack Exchange", "dates"),
+        "arts": ("Literature Stack Exchange", "novels"),
+    }
+    topics = ["merge", "tense", "product", "treaty", "author", "index", "clause", "limit", "reign", "poem"]
+    site, tag = sites[category]
+    topic, n = rng.choice(topics), rng.randint(2, 400)
+    if rng.random() < 0.5:
+        title, body, label = f"best {topic}??", "which is best tell me now pls", "true"
+    else:
+        title = f"What is the recorded {topic} for item {n}?"
+        body = (
+            f"Item {n} has a published {topic}. Which value does the {tag} reference give for it, "
+            f"and which page states that value?"
+        )
+        label = "false"
+    text = f"Site: {site}\nTitle: {title}\nTags: {tag}, {topic}\n\nQuestion:\n{body}"
+    question = _noul(CLOSED_Q, "Closed", "Still open at least a week later")
+    return _race(
+        f"stackexchange-closed-{category}", category, "known", text, question, label, "race:se-closed",
+    )
+
+
+def gen_accepted(rng, category):
+    """One answer meets the question. The others miss the number, or answer a different item."""
+    sites = {
+        "tools": ("Stack Overflow", "git"),
+        "language": ("English Language & Usage Stack Exchange", "morphology"),
+        "reasoning": ("Mathematics Stack Exchange", "arithmetic"),
+        "retrieval": ("History Stack Exchange", "dates"),
+        "arts": ("Literature Stack Exchange", "attribution"),
+    }
+    words = ["merge", "lemma", "factor", "treaty", "canto", "index", "clause", "series"]
+    site, tag = sites[category]
+    word, n = rng.choice(words), rng.randint(3, 80)
+    title = f"What is the recorded {word} value for item {n}?"
+    good = f"The recorded {word} value for item {n} is {n * 3}."
+    wrong = [
+        f"The recorded {word} value for item {n} is {n * 3 + 1}.",
+        f"The recorded {word} value for item {n + 1} is {(n + 1) * 3}.",
+        f"Item {n} has no {word} value.",
+    ]
+    options = [good, *rng.sample(wrong, 2)]
+    rng.shuffle(options)
+    label = LETTERS[options.index(good)]
+    body = f"Site: {site}\nTitle: {title}\nTags: {tag}, {word}\n\nQuestion:\n{title}"
+    for i, answer in enumerate(options):
+        body += f"\n\nAnswer {LETTERS[i]}:\n{answer}"
+    question = {
+        "type": "choice",
+        "instructions": ACCEPTED_Q,
+        "criteria": {LETTERS[i]: f"Answer {LETTERS[i]}" for i in range(len(options))},
+    }
+    return _race(
+        f"stackexchange-accepted-{category}", category, "new", body, question, label, "race:se-accepted",
+    )
+
+
+def gen_arxiv(rng, family):
+    papers = {
+        "arxiv-category-cs": (
+            "tools", "cs.LG",
+            [
+                ("Training a convolutional network on photographs", "We train a convolutional network to classify photographs of street signs."),
+                ("Parsing a sentence into a dependency tree", "We describe a parser that labels the head of each word in a sentence."),
+                ("A hash function resistant to collision search", "We propose a hash function and bound the cost of finding two inputs with the same digest."),
+            ],
+            ["cs.LG", "cs.CL", "cs.CR", "math.NT", "econ.GN", "quant-ph"],
+        ),
+        "arxiv-category-math": (
+            "reasoning", "math.CO",
+            [
+                ("Counting spanning trees of a graph", "We count the spanning trees of a connected graph by the matrix-tree theorem."),
+                ("A bound on the prime gap", "We prove an upper bound on the gap between consecutive prime numbers."),
+                ("Solutions of the heat equation", "We study smooth solutions of the heat equation on a bounded domain."),
+            ],
+            ["math.CO", "math.NT", "math.AP", "cs.CV", "astro-ph.CO", "q-bio.NC"],
+        ),
+        "arxiv-category-physics": (
+            "retrieval", "quant-ph",
+            [
+                ("A two-qubit gate on a trapped ion", "We implement a two-qubit entangling gate on trapped ions and measure its fidelity."),
+                ("The spectrum of a lensed galaxy", "We measure the redshift of a galaxy magnified by a foreground cluster."),
+                ("Scattering amplitudes in a gauge theory", "We compute tree-level scattering amplitudes for a non-abelian gauge theory."),
+            ],
+            ["quant-ph", "astro-ph.CO", "hep-th", "cs.LG", "math.CO", "econ.EM"],
+        ),
+        "arxiv-category-other": (
+            "retrieval", "econ.GN",
+            [
+                ("A field experiment on a cash transfer", "We randomise a cash transfer and measure household spending a year later."),
+                ("Spike timing in the auditory cortex", "We record spike times from auditory cortex while a tone is played."),
+                ("A filter for a noisy sensor", "We design a digital filter that removes a known interference from a sensor trace."),
+            ],
+            ["econ.GN", "q-bio.NC", "eess.SP", "cs.CL", "math.NT", "hep-th"],
+        ),
+    }
+    category, _code, rows, pool = papers[family]
+    title, abstract = rng.choice(rows)
+    codes = {
+        "arxiv-category-cs": ["cs.CV", "cs.CL", "cs.CR"],
+        "arxiv-category-math": ["math.CO", "math.NT", "math.AP"],
+        "arxiv-category-physics": ["quant-ph", "astro-ph.CO", "hep-th"],
+        "arxiv-category-other": ["econ.GN", "q-bio.NC", "eess.SP"],
+    }
+    correct = codes[family][rows.index((title, abstract))]
+    year, samples = rng.randint(2016, 2024), rng.randint(20, 400)
+    abstract = f"{abstract} The study uses {samples} observations collected in {year}."
+    distractors = [c for c in pool if c != correct]
+    chosen = [correct, *rng.sample(distractors, 3)]
+    rng.shuffle(chosen)
+    label = LETTERS[chosen.index(correct)]
+    question = {
+        "type": "choice",
+        "instructions": ARXIV_Q,
+        "criteria": {LETTERS[i]: code for i, code in enumerate(chosen)},
+    }
+    text = f"Title: {title}\n\nAbstract:\n{abstract}"
+    return _race(family, category, "known", text, question, label, "race:arxiv")
+
+
+def gen_afc(rng):
+    name = rng.choice(["Kepler", "Shelley", "Osaka", "Lovelace", "Hokkaido"])
+    year, n = rng.randint(1991, 2019), rng.randint(2, 40)
+    title = f"{name} record {n}"
+    if rng.random() < 0.5:
+        text = (
+            f"Wiki: English Wikipedia\nDraft: {title}\n\nDraft text:\n"
+            f"{title} is documented in two independent sources. The {year} survey records {n} "
+            f"for this subject. [ref: Survey, {year}]\n\nA second source repeats that figure. "
+            f"[ref: Journal, {year + 1}]"
+        )
+        label = "true"
+    else:
+        text = (
+            f"Wiki: English Wikipedia\nDraft: {title}\n\nDraft text:\n"
+            f"I think {title} is amazing and my company is the best place to learn about it. "
+            f"Buy our guide, offer {n}."
+        )
+        label = "false"
+    question = _noul(AFC_Q, "Accepted as an article", "Declined or rejected")
+    return _race("wikipedia-afc", "reasoning", "new", text, question, label, "race:afc")
+
+
+RACE_BUILDERS = {
+    "wikipedia-revert": gen_revert,
+    "wikidata-revert": gen_wikidata,
+    "wikipedia-afc": gen_afc,
+}
+
+
+def race_case(rng, family):
+    if family in WIKI_NAMES and family != "wikipedia-revert":
+        return gen_revert(rng, family)
+    if family.startswith("stackexchange-closed-"):
+        return gen_closed(rng, family.removeprefix("stackexchange-closed-"))
+    if family.startswith("stackexchange-accepted-"):
+        return gen_accepted(rng, family.removeprefix("stackexchange-accepted-"))
+    if family.startswith("arxiv-category-"):
+        return gen_arxiv(rng, family)
+    return RACE_BUILDERS[family](rng)
+
+
+def race_cases(rng, counts, dev_cap):
+    """(train, dev) for the Outcomes-shaped families. A hash of the id holds out dev, capped."""
+    train, dev, dev_count, seen = [], [], Counter(), set()
+    for family, count in counts.items():
+        made, spins = 0, 0
+        while made < count:
+            case = race_case(rng, family)
+            spins += 1
+            if case["id"] in seen:
+                if spins > count * 30:
+                    raise RuntimeError(f"{family}: generator is repeating before {count} rows")
+                continue
+            seen.add(case["id"])
+            if is_dev(case["id"], 12) and dev_count[family] < dev_cap:
+                dev_count[family] += 1
+                dev.append(case)
+                continue
+            train.append(case)
+            made += 1
+    return train, dev
+
+
 COMPUTED = {
     "count": gen_count,
     "coverage": gen_coverage,
@@ -610,6 +958,90 @@ COMPUTED = {
     "tools-noul": gen_tools_noul,
     "tools-choice": gen_tools_choice,
 }
+
+
+def _read_jsonl(path):
+    rows = []
+    with open(path) as stream:
+        for line in stream:
+            if line.strip():
+                rows.append(json.loads(line))
+    return rows
+
+
+def _take(rng, rows, count):
+    if len(rows) <= count:
+        return list(rows)
+    return rng.sample(rows, count)
+
+
+def resample(args, rng, out):
+    """Keep a weight-matched slice of the current bank and add Outcomes-shaped cases."""
+    train_rows = _read_jsonl(args.resample)
+    dev_rows = _read_jsonl(args.resample_dev) if args.resample_dev else []
+    by_family = {}
+    for case in train_rows:
+        by_family.setdefault(case["family"], []).append(case)
+    dev_by_family = {}
+    seeds = []
+    for case in dev_rows:
+        if not str(case.get("id", "")).startswith("kit-"):
+            seeds.append(case)
+        else:
+            dev_by_family.setdefault(case["family"], []).append(case)
+    train, dev, short = [], [], {}
+    for family, count in BANK_TRAIN.items():
+        have = by_family.get(family, [])
+        picked = _take(rng, have, count)
+        if len(picked) < count:
+            short[family] = {"wanted": count, "have": len(picked)}
+        train.extend(picked)
+        dev.extend(_take(rng, dev_by_family.get(family, []), args.dev_cap_per_family))
+    race_train, race_dev = race_cases(rng, RACE_TRAIN, args.dev_cap_per_family)
+    train.extend(race_train)
+    dev.extend(race_dev)
+    dev.extend(seeds)
+    rng.shuffle(train)
+    rng.shuffle(dev)
+    for path, rows in ((out / "train.jsonl", train), (out / "dev.jsonl", dev)):
+        with path.open("w") as stream:
+            for case in rows:
+                stream.write(json.dumps(case) + "\n")
+
+    def mix(rows):
+        categories, blocks = Counter(), Counter()
+        for case in rows:
+            categories[case["category"]] += 1
+            blocks[case["block"]] += 1
+        total = max(1, len(rows))
+        return {
+            "rows": len(rows),
+            "by_family": dict(sorted(Counter(c["family"] for c in rows).items())),
+            "category_share": {k: round(v / total, 3) for k, v in sorted(categories.items())},
+            "block_share": {k: round(v / total, 3) for k, v in sorted(blocks.items())},
+        }
+
+    manifest = {
+        "seed": args.seed,
+        "purpose": "race-weighted: bank families follow the score weights, and Outcomes-shaped "
+        "tasks cover the new block and the streams that replace bank families",
+        "score_weights": {"reasoning": 0.2585, "language": 0.2585, "retrieval": 0.2002,
+                          "tools": 0.1828, "arts": 0.10, "known": 0.6, "new": 0.4},
+        "train": mix(train),
+        "dev": mix(dev),
+        "bank_short": short,
+        "dropped_train_families": sorted(set(by_family) - set(BANK_TRAIN)),
+    }
+    (out / "manifest.json").write_text(json.dumps(manifest, indent=1) + "\n")
+    print(json.dumps({
+        "train_rows": len(train),
+        "dev_rows": len(dev),
+        "train_category_share": manifest["train"]["category_share"],
+        "train_block_share": manifest["train"]["block_share"],
+        "bank_short": short,
+        "dropped_train_families": manifest["dropped_train_families"],
+    }, indent=1))
+    return 0
 
 
 def is_dev(key, percent):
@@ -628,10 +1060,14 @@ def main(argv=None):
     parser.add_argument("--seeds", help="folder holding the public base-exam-seed cases.jsonl files")
     parser.add_argument("--politeness-zip", help="ConvoKit stack-exchange-politeness-corpus zip")
     parser.add_argument("--no-datasets", action="store_true", help="computed families only (offline)")
+    parser.add_argument("--resample", help="existing train.jsonl to reweight toward the race")
+    parser.add_argument("--resample-dev", help="existing dev.jsonl; seed rows are kept")
     args = parser.parse_args(argv)
     rng = random.Random(args.seed)
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
+    if args.resample:
+        return resample(args, rng, out)
     seeds = seed_dev_cases(args.seeds) if args.seeds else []
     # A seed's question text never becomes a training row, even when a generator reproduces it.
     seed_keys = {json.dumps([c["state"], c["question"]], sort_keys=True) for c in seeds}

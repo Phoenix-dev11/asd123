@@ -103,6 +103,17 @@ def main(argv=None):
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args(argv)
     state = parse(fetch())
+    seen = {m["uid"] for m in state["miners"]}
+    for number in range(2, 40):  # the miner table is paginated, 25 rows a page
+        try:
+            more = parse(fetch(f"{URL}?page={number}"))["miners"]
+        except SystemExit:
+            break
+        fresh = [m for m in more if m["uid"] not in seen]
+        if not fresh:
+            break
+        seen.update(m["uid"] for m in fresh)
+        state["miners"] += fresh
     state["fetched_at"] = int(time.time())
     if args.log:
         with open(args.log, "a") as stream:
