@@ -1,0 +1,33 @@
+{
+ "version": "zils-current/v1",
+ "seed": 0,
+ "balanced": false,
+ "leak_filters": true,
+ "max_tokens": 4096,
+ "exported": 476,
+ "streams": {
+  "wikidata-revert": {
+   "licence": "CC0-1.0: Wikidata structured data; link source.url as a courtesy",
+   "publishable": true,
+   "pending": 0,
+   "resolved": 476,
+   "dropped": {
+    "sampled-out": 18
+   },
+   "filtered": {},
+   "duplicates": 0,
+   "overlap": 0,
+   "labels": {
+    "false": 312,
+    "true": 164
+   },
+   "exported": 476,
+   "exported_labels": {
+    "false": 312,
+    "true": 164
+   },
+   "median_hours_to_resolution": 266.05,
+   "median_hours_to_outcome": null
+  }
+ }
+}

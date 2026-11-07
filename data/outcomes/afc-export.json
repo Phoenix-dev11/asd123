@@ -1,0 +1,33 @@
+{
+ "version": "zils-current/v1",
+ "seed": 0,
+ "balanced": false,
+ "leak_filters": true,
+ "max_tokens": 4096,
+ "exported": 1841,
+ "streams": {
+  "wikipedia-afc": {
+   "licence": "CC-BY-SA-4.0: attribute via source.url; share-alike applies to published text",
+   "publishable": true,
+   "pending": 0,
+   "resolved": 1878,
+   "dropped": {
+    "no-text": 82
+   },
+   "filtered": {},
+   "duplicates": 37,
+   "overlap": 0,
+   "labels": {
+    "false": 1590,
+    "true": 251
+   },
+   "exported": 1841,
+   "exported_labels": {
+    "false": 1590,
+    "true": 251
+   },
+   "median_hours_to_resolution": 423.5,
+   "median_hours_to_outcome": 2.78
+  }
+ }
+}
